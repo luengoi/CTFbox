@@ -14,6 +14,10 @@ if [ ! -d "$PWD/data/themes/powerlevel10k" ]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$PWD/data/themes/powerlevel10k"
 fi
 
+if [ ! -f ~/.zshrc ]; then
+    touch ~/.zshrc
+fi
+
 # Set the theme on the .zshrc file.
 MAGIC="# CTFbox: THEME setup"
 if ! grep "$MAGIC" ~/.zshrc > /dev/null 2>&1; then
