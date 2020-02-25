@@ -14,6 +14,7 @@ RUN dpkg --add-architecture i386 && \
 RUN useradd -m ctf
 RUN echo "ctf ALL=NOPASSWD: ALL" > /etc/sudoers.d/ctf
 
+COPY .git /home/ctf/tools/.git
 COPY bin/manage /home/ctf/tools/bin/
 COPY bin/venvwrap /home/ctf/tools/bin/
 COPY bin/pip /home/ctf/tools/bin/
@@ -21,4 +22,5 @@ RUN chown -R ctf:ctf /home/ctf/tools
 
 USER ctf
 WORKDIR /home/ctf/tools
+RUN git checkout .
 RUN bin/manage -s setup
