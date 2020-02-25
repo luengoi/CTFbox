@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ -z "${WORKON_HOME+x}" ]]; then
+    export WORKON_HOME="$HOME/.virtualenvs"
+fi
+if [[ ! -d "$WORKON_HOME" ]]; then
+    mkdir -p "$WORKON_HOME"
+fi
+
+VE_DIR="$WORKON_HOME/ctftools"
+
+if [[ ! -d "$VE_DIR" || ! -e "$VE_DIR/bin/activate" ]]; then
+    echo "[+] Creating virtualenv ctftools" >&2
+    virtualenv --system-site-packages -p "$(which python3)" "$VE_DIR"
+fi
+
+# If we are currently on different virtualenv, deactivate it.
+if [[ -z "${VIRTUAL_ENV+x}" || "$VIRTUAL_ENV" != "$VE_DIR" ]]; then
+    if [[ -n "${VIRTUAL_ENV+x}" ]]; then
+        source ${VIRTUAL_ENV}/bin/activate
+        deactivate
+    fi
+    source "$VE_DIR/bin/activate"
+fi

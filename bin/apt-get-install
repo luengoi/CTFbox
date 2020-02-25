@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+# Wrapper for a scriptable apt-get. This script makes it easier to intsall
+# packages using apt-get in a scriptable manner.
+
+export DEBIAN_FRONTEND="noninteractive"
+
+# Update the package lists.
+apt-get -q update
+
+# Install the packages.
+apt-get install  -y --auto-remove "$@"
+
+# Remove package lists and apt-get metadata. Reduce the size of the docker
+# image layer.
+apt-get -q clean
+rm -rf /var/lib/apt/lists/*

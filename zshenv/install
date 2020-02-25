@@ -1,0 +1,25 @@
+#!/bin/bash -ex
+# vim: ft=bash ts=4 sw=4 sts=4 et fenc=utf-8
+
+## ZSH ENVIRONMENT
+#
+# This is not exactly a 'tool' but is placed here to automate the installation
+# of the ZSH working environment.
+
+# Install powerlevel10k theme, this configuration uses glyphs provided by the
+# font Consolas NF (https://github.com/Znuff/consolas-powerline).
+
+if [ ! -d "$PWD/data/themes/powerlevel10k" ]; then
+    mkdir -p "$PWD/data/themes/"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$PWD/data/themes/powerlevel10k"
+fi
+
+# Set the theme on the .zshrc file.
+MAGIC="# CTFbox: THEME setup"
+if ! grep "$MAGIC" ~/.zshrc > /dev/null 2>&1; then
+    cat >> ~/.zshrc << EOF
+$MAGIC
+source $PWD/data/prompt.zsh
+source $PWD/data/themes/powerlevel10k/powerlevel10k.zsh-theme
+EOF
+fi
