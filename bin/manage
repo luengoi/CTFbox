@@ -52,8 +52,8 @@ function base_build_setup()
     # CTFbox: PATH setup
     MAGIC="# PATH setup"
 
-    if ! grep "$MAGIC" "$f" >/dev/null 2>&1; then
-        cat >> "$f" << EOF
+    if ! grep "$MAGIC" ~/.zshrc >/dev/null 2>&1; then
+        cat >> ~/.zshrc << EOF
 $MAGIC
 export PATH="$PWD/bin:\$PATH"
 EOF
