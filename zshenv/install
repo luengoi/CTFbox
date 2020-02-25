@@ -9,9 +9,9 @@
 # Install powerlevel10k theme, this configuration uses glyphs provided by the
 # font Consolas NF (https://github.com/Znuff/consolas-powerline).
 
-if [ ! -d "$PWD/data/themes/powerlevel10k" ]; then
-    mkdir -p "$PWD/data/themes/"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$PWD/data/themes/powerlevel10k"
+if [ ! -d "$PWD/zshenv/data/themes/powerlevel10k" ]; then
+    mkdir -p "$PWD/zshenv/data/themes/"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$PWD/zshenv/data/themes/powerlevel10k"
 fi
 
 if [ ! -f ~/.zshrc ]; then
@@ -23,7 +23,7 @@ MAGIC="# CTFbox: THEME setup"
 if ! grep "$MAGIC" ~/.zshrc > /dev/null 2>&1; then
     cat >> ~/.zshrc << EOF
 $MAGIC
-source $PWD/data/prompt.zsh
-source $PWD/data/themes/powerlevel10k/powerlevel10k.zsh-theme
+source $PWD/zshenv/data/prompt.zsh
+source $PWD/zshenv/data/themes/powerlevel10k/powerlevel10k.zsh-theme
 EOF
 fi
