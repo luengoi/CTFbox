@@ -60,7 +60,7 @@ EOF
     fi
 
     # Create the python virtualenv
-    "$PWD/bin/pip" freeze 2>&1 > /dev/null
+    "$PWD/bin/tools-pip" freeze 2>&1 > /dev/null
 }
 
 
