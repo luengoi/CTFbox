@@ -238,8 +238,8 @@ case $ACTION in
 		rm -f install.log
 
 	    # first get distri specific dependencies
-        INSTALL_DEP="install-dep"
-        if [[ $(find . -name "INSTALL_DEP" | wc -l) -ge 1 ]]; then
+        INSTALL_DEP="./install-dep"
+        if [[ $(find . -name 'install-dep' | wc -l) -ge 1 ]]; then
             if [[ -x "$INSTALL_DEP" && "$ALLOW_SUDO" -eq 1 ]]; then
                 set +e
                 if [[ "$VERBOSE_OUTPUT" -eq 1 ]]; then

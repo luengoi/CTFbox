@@ -2,7 +2,7 @@
 
 [ -e ropper ] || git clone --depth 1 https://github.com/sashs/Ropper.git ropper
 
-tools-pip install --no-binary -I capstone
+tools-pip install -I --no-binary capstone
 tools-pip install filebytes
 tools-pip install -e ropper
 tools-pip install -U keystone-engine

@@ -17,17 +17,20 @@ RUN useradd -d /home/ctf -m -s /bin/zsh ctf
 RUN echo "ctf ALL=NOPASSWD: ALL" > /etc/sudoers.d/ctf
 
 COPY .git /home/ctf/tools/.git
+
+WORKDIR /home/ctf/tools
+RUN git checkout .
+
 COPY bin/manage /home/ctf/tools/bin/
 COPY bin/tools-venv /home/ctf/tools/bin/
 COPY bin/tools-pip /home/ctf/tools/bin/
 RUN chown -R ctf:ctf /home/ctf/tools
 
 USER ctf
-WORKDIR /home/ctf/tools
-RUN git checkout .
 RUN bin/manage -s setup
 
 ARG TOOLS
+ENV PATH="/home/ctf/tools/bin:${PATH}"
 RUN for tool in $TOOLS; do bin/manage -s install "$tool"; done
 
 WORKDIR /home/ctf
