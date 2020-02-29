@@ -1,0 +1,41 @@
+# vim: ft=config
+## matterbeam radare2 configuration file
+
+# ASM values
+
+e asm.cmt.right=true   # Display comments on the right side of the instruction
+
+# CFG values
+
+e cfg.bigendian=false  # Use little endianness
+e cfg.fortunes=false   # Disable fortune messages at startup
+e cfg.newtab=true      # Show command descriptions in autocompletion
+e cfg.editor=nvim      # Use NeoVim instead of the default Vi
+
+# SCR values
+
+e scr.color=3            # 16M True Color palette
+e scr.color.grep=true    # Colors on grep output
+e scr.pager=less -R      # Set the pager for large output
+e scr.prompt=true        # Show prompt in command line
+e scr.prompt.flag=true   # Show the flag name in command prompt
+e scr.seek=main          # Seek to main at startup
+e scr.utf8=true          # Use UTF-8 instead of ANSI
+e scr.utf8.curvy=true    # Use curved corners
+
+# DBG values
+
+e dbg.follow.child=true    # Continue tracing the child process on fork
+
+# GRAPH values
+
+e graph.comments=false     # Disable comments in graph mode
+
+# Aliases
+
+$wiki='#!pipe python ~/.local/share/radare2/r2pm/git/r2wiki/r2wiki.py'
+$r='. ~/.config/radare2/radare2rc'
+
+# Theme
+
+eco ayu

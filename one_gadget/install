@@ -1,0 +1,17 @@
+#!/bin/bash -ex
+
+gem install --user-install one_gadget
+
+# make sure the gem user-install directory is in PATH
+GEM_BIN_PATH=$(gem environment | grep "USER INSTALL" | awk -F ': ' '{ print $2 }')/bin
+
+MAGIC="# CTFbox: gem user install"
+
+if [[ -e ~/.zshrc ]]; then
+    if ! grep "$MAGIC" ~/.zshrc >/dev/null 2>&1; then
+        cat >> ~/.zshrc << EOF
+$MAGIC
+export PATH=\$PATH:$GEM_BIN_PATH
+EOF
+    fi
+fi

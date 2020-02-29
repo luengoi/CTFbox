@@ -11,7 +11,7 @@ RUN dpkg --add-architecture i386 && \
     python3 python3-dev python3-pip git unzip p7zip-full sudo ca-certificates \
     strace ltrace gdb gdb-multiarch ruby-dev libssl-dev libffi-dev zsh \
     libc6:i386 libncurses5:i386 libstdc++6:i386 && \
-    python3 -m pip install virtualenv
+    python3 -m pip install virtualenvwrapper
 
 RUN useradd -d /home/ctf -m -s /bin/zsh ctf
 RUN echo "ctf ALL=NOPASSWD: ALL" > /etc/sudoers.d/ctf
@@ -26,3 +26,8 @@ USER ctf
 WORKDIR /home/ctf/tools
 RUN git checkout .
 RUN bin/manage -s setup
+
+ARG TOOLS
+RUN for tool in $TOOLS; do bin/manage -s install "$tool"; done
+
+WORKDIR /home/ctf

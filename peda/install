@@ -1,0 +1,30 @@
+#!/bin/bash -ex
+set -eu -o pipefail
+
+git clone --depth 1 https://github.com/scwuaptx/peda.git
+
+mkdir bin
+cat > bin/peda <<EOF
+#!/bin/sh
+exec gdb -q -ex init-peda "\$@"
+EOF
+chmod +rx bin/peda
+
+cd peda
+# make sure gdbinit exists
+touch ~/.gdbinit
+if ! grep "init-peda" ~/.gdbinit; then
+  cat >> ~/.gdbinit <<EOF
+
+####
+# PEDA integration
+define init-peda
+  source $PWD/peda.py
+end
+document init-peda
+  Initializes the PEDA (Python Exploit Developement Assistant for GDB) framework
+end
+####
+
+EOF
+fi

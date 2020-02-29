@@ -18,4 +18,7 @@ END
     chmod 755 $i
 done
 
+# link the rc file
+ln -sf $PWD/../data/radare2rc ~/.radare2rc
+
 tools-pip install -U r2pipe
